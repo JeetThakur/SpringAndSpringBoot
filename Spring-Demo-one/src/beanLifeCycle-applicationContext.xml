@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- Define your beans here -->
+    
+    <!-- Define the dependency bean -->
+    <bean id="myFortune"
+    	  class = "com.luv2code.springdemo.HappyFortuneService">
+    
+    </bean>
+    <bean id="customProcessor"
+    		class="com.luv2code.springdemo.MyCustomBeanProcessor">
+   	</bean>
+    
+    <!-- scope = "prototype" do inside the bean to get multiple beans for multiple requests -->
+    <bean id="myCoach"
+    	  class = "com.luv2code.springdemo.TrackCoach" 
+    	  init-method = "doMyStartupStuff"
+    	  destroy-method="destroy"
+    	  scope="prototype"
+    	  >
+    	  
+    	  <!-- Constructor dependency injection -->
+    	  <constructor-arg ref="myFortune"></constructor-arg>
+   	</bean>
+   	
+   	
+   		<!-- New bean for cricket coach -->
+   	<bean 	id="myCricketCoach"
+   			class = "com.luv2code.springdemo.CricketCoach"
+   			init-method="doMyStuffInitMethod"
+   			destroy-method="doMyStuffDestroyMethod">
+   	
+   	<!-- Setter injection -->
+   	<property name="fortuneService" ref="myFortune"/>
+   	
+   	<!-- Value based injections -->
+   	<!-- 
+   	<property name="emailAddr" value = "jeet.thakur2196@gmail.com"/>
+   	<property name="teamName" value = "Mumbai Indians"/> 
+   	-->
+   	<!-- Inject literal values -->
+   	<property name="emailAddr" value = "${foo.email}"/>
+   	<property name="teamName" value = "${foo.team}"/> 
+   	
+   	
+   	</bean>
+   	
+</beans>
+
+
+
+
+
