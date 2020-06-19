@@ -1,0 +1,19 @@
+package com.luv2code.springdemo.mvc;
+
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class SillyController {
+	
+	// Since already a request mapping present for the /showForm at some other controller ....
+	// Hence we can have a sub routing policy 
+	@RequestMapping("/showForm")
+	public String displayForm() {
+		// Spring mvc will go behind the scene and add the prefix and suffix of the package in the view and make sure it works
+		return "helloworld-form";
+	}
+}
